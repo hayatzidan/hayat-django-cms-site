@@ -1,0 +1,66 @@
+{% load socialaccount %}
+<div class="google-login-widget">
+  {% if not user.is_authenticated %}
+    <a href="{% provider_login_url 'google' %}" class="google-login-button">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google icon">
+      Continue with Google
+    </a>
+  {% elif google_account %}
+    <h2>Welcome, you are linked with Google account {{ google_account.extra_data.email }}</h2>
+  {% else %}
+    <a href="{% provider_login_url 'google' process='connect' %}" class="google-login-button">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google icon">
+      Click here to link your Google account
+    </a>
+  {% endif %}
+</div>
+<style>
+  .google-login-widget {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 300px;
+    margin: 40px auto;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .google-login-widget h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .google-login-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #DDEAF8;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .google-login-button img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .google-login-button:hover {
+    background-color: #3367d6;
+  }
+
+  /* .unlink-btn {
+  color: red;
+  font-size: 14px;
+  margin-left: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+  } */
+
+</style>

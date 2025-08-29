@@ -1,0 +1,12 @@
+/staticfiles/
+/media/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+venv/
+.env
+all_data.json
+send_test_sms.py

@@ -1,0 +1,114 @@
+<div class="creator-filter">
+  <h2>Select a Category</h2>
+  <select id="category-filter" onchange="filterCreators()">
+    <option value="All">-- All Categories --</option>
+    {% for cat in categories %}
+      <option value="{{ cat }}">{{ cat }}</option>
+    {% endfor %}
+  </select>
+
+  <div id="creator-list">
+    {% for creator in creators %}
+      <div class="creator-card" data-category="{{ creator.category }}">
+        <h3>{{ creator.name }}</h3>
+        <ul>
+          {% if creator.instagram_profile_link %}
+            <li><a href="{{ creator.instagram_profile_link }}" target="_blank">Instagram</a></li>
+          {% endif %}
+          {% if creator.facebook_profile_link %}
+            <li><a href="{{ creator.facebook_profile_link }}" target="_blank">Facebook</a></li>
+          {% endif %}
+          {% if creator.tiktok_profile_link %}
+            <li><a href="{{ creator.tiktok_profile_link }}" target="_blank">TikTok</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+function filterCreators() {
+  const selected = document.getElementById('category-filter').value;
+  const cards = document.querySelectorAll('.creator-card');
+  cards.forEach(card => {
+    const cat = card.getAttribute('data-category');
+    card.style.display = (selected === 'All' || cat === selected) ? 'block' : 'none';
+  });
+}
+</script>
+
+
+
+<style>
+  .creator-filter {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+  }
+
+  .creator-filter h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  #category-filter {
+    display: block;
+    margin: 0 auto 30px auto;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    min-width: 200px;
+  }
+
+  #creator-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .creator-card {
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 16px;
+    width: 260px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .creator-card:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .creator-card h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #222;
+  }
+
+  .creator-card ul {
+    padding-left: 16px;
+    margin-top: 10px;
+  }
+
+  .creator-card li {
+    margin-bottom: 6px;
+  }
+
+  .creator-card a {
+    text-decoration: none;
+    color: #1da1f2;
+  }
+
+  .creator-card a:hover {
+    text-decoration: underline;
+  }
+</style>

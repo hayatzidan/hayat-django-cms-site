@@ -1,0 +1,233 @@
+{% load cms_tags menu_tags sekizai_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    h3 {
+      font-size: 2rem;
+      color: #333;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .jhjik {
+      background-color: #007BFF;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      flex: 1;
+      text-align: center;
+    }
+
+    .nav-links ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links ul li {
+      display: inline;
+      margin: 0 10px;
+    }
+
+    .nav-links ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.1rem;
+      padding: 8px 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-button {
+      padding-right: 10px;
+    }
+
+    .logout-button button {
+      background-color: rgb(181, 57, 57);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .account-icon:hover {
+
+      background-color: #E1E2E4;
+    }
+
+
+
+
+
+    .content {
+      padding: 20px;
+    }
+
+    .sidebar {
+      padding: 20px;
+      background-color: #f7f7f7;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .account-section {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    .account-icon {
+      font-size: 33px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .account-menu {
+      display: none;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      position: absolute;
+      top: 35px;
+      right: 0;
+      min-width: 160px;
+      border-radius: 6px;
+    }
+
+    .account-menu button {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      margin: 4px 0;
+      text-align: left;
+      background-color: rgb(181, 57, 57);
+      border: none;
+      text-decoration: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+
+    .account-menu a {
+      display: block;
+      width: 90%;
+      padding: 8px;
+      margin: 4px 0;
+      text-align: left;
+      background-color: rgb(181, 57, 57);
+      border: none;
+      text-decoration: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .account-menu button:hover,
+    .account-menu a:hover {
+      background-color: #c82333;
+    }
+
+    #iframeContainer {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 60%;
+      height: 70%;
+      background: white;
+      border: 2px solid #333;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+    }
+  </style>
+  {% render_block "css" %}
+</head>
+<body>
+  {% cms_toolbar %}
+
+  <h3>Welcome to my website, please check my employees:</h3>
+
+  <nav class="jhjik">
+    <div class="nav-links">
+      <ul>
+        {% show_menu 0 100 100 100 %}
+      </ul>
+    </div>
+
+    {% if request.user.is_authenticated %}
+      <div class="logout-button">
+        <form action="{% url 'account_logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+    {% endif %}
+
+
+    {% if request.user.is_authenticated %}
+      <div class="account-section">
+        <button class="account-icon" onclick="toggleAccountMenu()">
+          <img src="https://cdn.mykoozie.com/media/wysiwyg/WebAssets/header/my-account.png" 
+         alt="Account" 
+         style="width: 25px; height: 25px;" />
+
+        </button>
+        <div id="account-menu" class="account-menu">
+          <form action="{% url 'account_delete' %}" method="post" onsubmit="return confirm('Are you sure you want to delete your account?');">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Delete Account</button>
+          </form>
+          <a href="{% url 'accountt_settings' %}">Linked Accounts</a>
+        </div>
+      </div>  
+    {% endif %}
+  </nav>
+
+
+
+  <div style="text-align: center; margin-top: 20px;"></div>
+
+  {% block content %}
+    {% placeholder "content" %}
+  {% endblock content %}
+
+
+  <script>
+  function toggleAccountMenu() {
+    const menu = document.getElementById("account-menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+  </script>
+  {% render_block "js" %}
+</body>
+</html>

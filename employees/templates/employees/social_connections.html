@@ -1,0 +1,17 @@
+<!-- templates/social_connections.html -->
+
+<h2>Connected Accounts</h2>
+
+<ul>
+  {% for account in accounts %}
+    <li>
+      {{ account.provider|title }} – {{ account.extra_data.email }}
+      <form method="post" action="{% url 'unlink_account' account.id %}">
+        {% csrf_token %}
+        <button type="submit">Unlink</button>
+      </form>
+    </li>
+  {% empty %}
+    <li>No connected accounts.</li>
+  {% endfor %}
+</ul>

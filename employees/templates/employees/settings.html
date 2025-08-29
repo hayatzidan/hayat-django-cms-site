@@ -1,0 +1,19 @@
+{% load socialaccount %}
+
+<h1>Linked Accounts</h1>
+
+{% if accounts %}
+  <ul>
+    {% for account in accounts %}
+      <li>
+        <strong>{{ account.provider|title }}</strong> – {{ account.extra_data.email }}
+        <form method="post" action="{% url 'unlink_account' account.id %}">
+          {% csrf_token %}
+          <button type="submit">Unlink</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No accounts linked.</p>
+{% endif %}

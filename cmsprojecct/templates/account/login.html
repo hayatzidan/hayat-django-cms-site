@@ -1,0 +1,50 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .google-btn {
+            background-color: #4285F4;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .google-btn:hover {
+            background-color: #3367d6;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login with Google</h2>
+        <a href="{% provider_login_url 'google' %}">
+            <button class="google-btn">Continue with Google</button>
+        </a>
+    </div>
+</body>
+</html>

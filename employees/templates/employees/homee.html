@@ -1,0 +1,131 @@
+{% load socialaccount %}
+{% load i18n %}
+
+<h1>Welcome to my website</h1>
+
+<!-- Google Section -->
+<div class="google-login-widget">
+  {% if not user.is_authenticated %}
+    <!-- Case 1: Not logged in -->
+    <a href="{% provider_login_url 'google' %}" class="google-login-button">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google icon">
+      Continue with Google
+    </a>
+  {% elif google_account %}
+    <!-- Case 2: Logged in with Google -->
+    <h2>Welcome, you are linked with Google account {{ google_account.extra_data.email }}</h2>
+  {% else %}
+    <!-- Case 3: Logged in with Facebook but not Google -->
+    <a href="{% provider_login_url 'google' %}" class="google-login-button">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google icon">
+      Click here to link your Google account
+    </a>
+  {% endif %}
+</div>
+
+
+<!-- Facebook Section -->
+<div class="facebook-login-widget">
+  {% if not user.is_authenticated %}
+    <!-- Case 1: Not logged in -->
+    {% get_current_language as LANGUAGE_CODE %}
+    <a href="/{{ LANGUAGE_CODE }}/accounts/facebook/login/" class="facebook-login-button">
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/021/460/489/small_2x/facebook-logo-free-png.png" alt="Facebook icon">
+      Continue with Facebook
+    </a>
+  {% elif facebook_account %}
+    <!-- Case 2: Logged in with Facebook -->
+    <h2>Welcome, you are linked with Facebook account {{ facebook_account.extra_data.name }}</h2>
+  {% else %}
+    <!-- Case 3: Logged in with Google but not Facebook -->
+    {% get_current_language as LANGUAGE_CODE %}
+    <a href="/{{ LANGUAGE_CODE }}/accounts/facebook/login/" class="facebook-login-button">
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/021/460/489/small_2x/facebook-logo-free-png.png" alt="Facebook icon">
+      Click here to link your Facebook account
+    </a>
+  {% endif %}
+</div>
+
+<style>
+  .google-login-widget {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 300px;
+    margin: 40px auto;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .google-login-widget h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .google-login-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #DDEAF8;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .google-login-button img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .google-login-button:hover {
+    background-color: #3367d6;
+  }
+   
+  .facebook-login-widget {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 300px;
+    margin: 40px auto;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .facebook-login-widget h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .facebook-login-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #DDEAF8;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .facebook-login-button img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .facebook-login-button:hover {
+    background-color: #3367d6;
+  }
+</style>
+
+

@@ -1,0 +1,7 @@
+{# employees/templates/employees/tiktok_login.html #}
+{% load static %}
+{% load socialaccount %}
+<a href="{% provider_login_url 'tiktok' %}" class="btn btn-dark">
+    <img src="{% static 'tiktok-icon.png' %}" alt="TikTok" style="height:20px; vertical-align:middle;">
+    Login with TikTok
+</a>

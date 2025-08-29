@@ -1,0 +1,7 @@
+<h2>Welcome, {{ user.first_name }}!</h2>
+
+{% for account in social_accounts %}
+    <p>You are linked with {{ account.provider|title }} as {{ account.extra_data.name }}</p>
+{% empty %}
+    <p>No social accounts linked yet.</p>
+{% endfor %}

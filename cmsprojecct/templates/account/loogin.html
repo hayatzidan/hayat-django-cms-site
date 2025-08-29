@@ -1,0 +1,16 @@
+{% load i18n %}
+{% load account socialaccount %}
+
+<h2>{% trans "Login" %}</h2>
+
+<form method="post" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% trans "Sign In" %}</button>
+</form>
+
+{% if socialaccount_providers %}
+    <hr>
+    <h3>{% trans "Or sign in using:" %}</h3>
+    {% include "socialaccount/snippets/provider_list.html" %}
+{% endif %}

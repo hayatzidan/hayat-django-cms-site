@@ -1,0 +1,128 @@
+<!-- Currency Converter Plugin -->
+<div class="currency-converter">
+  <h2>Currency Converter</h2>
+
+  <label for="amount">Amount:</label>
+  <input type="number" id="amount" />
+
+  <label for="fromCurrency">From:</label>
+  <select id="fromCurrency">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="INR">INR</option>
+    <option value="SAR">SAR</option>
+  </select>
+
+  <label for="toCurrency">To:</label>
+  <select id="toCurrency">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="INR">INR</option>
+    <option value="SAR">SAR</option>
+  </select>
+
+  <button id="convertBtn">Convert</button>
+
+  <h3 id="result"></h3>
+</div>
+
+<!-- Simple styling directly in the template -->
+<style>
+  .currency-converter {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+
+  .currency-converter h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .currency-converter label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #444;
+  }
+
+  .currency-converter input,
+  .currency-converter select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+  }
+
+  .currency-converter button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .currency-converter button:hover {
+    background-color: #218838;
+  }
+
+  .currency-converter h3#result {
+    text-align: center;
+    margin-top: 20px;
+    color: #222;
+  }
+</style>
+
+<!-- JavaScript -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const convertBtn = document.getElementById("convertBtn");
+    if (!convertBtn) {
+      console.error("Convert button not found.");
+      return;
+    }
+
+    convertBtn.addEventListener("click", async function () {
+      const amount = document.getElementById("amount").value;
+      const from = document.getElementById("fromCurrency").value;
+      const to = document.getElementById("toCurrency").value;
+
+      if (!amount || isNaN(amount)) {
+        document.getElementById("result").textContent = "Please enter a valid amount.";
+        return;
+      }
+
+      const apiKey = "3b5f6d6a4d2f725c9d5d756d"; // Replace with your actual API key
+      const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${from}`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data.conversion_rates || !data.conversion_rates[to]) {
+          document.getElementById("result").textContent = "Conversion rate not available.";
+          return;
+        }
+
+        const rate = data.conversion_rates[to];
+        const result = (amount * rate).toFixed(2);
+
+        document.getElementById("result").textContent = `${amount} ${from} = ${result} ${to}`;
+      } catch (error) {
+        document.getElementById("result").textContent = "Error fetching data.";
+        console.error("Conversion error:", error);
+      }
+    });
+  });
+</script>

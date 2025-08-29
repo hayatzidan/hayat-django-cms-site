@@ -1,0 +1,15 @@
+{% if accounts %}
+  <div class="linked-accounts">
+    <h4>{{ provider|capfirst }} Accounts Linked:</h4>
+    <ul>
+      {% for acc in accounts %}
+        <li>
+          ID: {{ acc.provider_account_id }} |
+          Linked on: {{ acc.date_linked }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% else %}
+  <p>No {{ provider|capfirst }} accounts linked yet.</p>
+{% endif %}
