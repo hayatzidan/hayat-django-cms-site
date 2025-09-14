@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 For the list of django CMS settings and their values, see
 https://docs.django-cms.org/en/release-4.1.x/reference/configuration.html
 """
-rom allauth.socialaccount.models import SocialApp
+from allauth.socialaccount.models import SocialApp
 from django.apps import AppConfig
 from decouple import config
 
