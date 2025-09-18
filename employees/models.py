@@ -121,6 +121,13 @@ class LinkedAccount(models.Model):
     def __str__(self):
         return f"User: {self.user.username} | Type: {self.provider} | ID: {self.provider_account_id} | Date: {self.date_linked.strftime('%Y-%m-%d %H:%M')}"
 
-        # return f"{self.provider.capitalize()} | ID: {self.provider_account_id} | User: {self.user.username} | Linked: {self.date_linked.strftime('%Y-%m-%d %H:%M')}"
+
+
+class ButtonClick(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    clicked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.username} clicked: {self.clicked}"
 
 
