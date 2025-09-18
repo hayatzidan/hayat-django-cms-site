@@ -217,20 +217,19 @@
     {% if user.is_authenticated %}
       <h2>Welcome, {{ user.username }}!</h2>
 
-      {% if not clicked %}
-        <form method="post">
-          {% csrf_token %}
+      <form method="post" action="{% url 'button_view' %}">
+        {% csrf_token %}
+        {% if not clicked %}
           <button type="submit">Click me</button>
-        </form>
-      {% else %}
-        <p>You already clicked the button ✅</p>
-      {% endif %}
+        {% else %}
+          <p>You already clicked the button ✅</p>
+        {% endif %}
+      </form>
 
       <p>{{ other_clicks }} other users clicked this button</p>
     {% else %}
       <p>You must log in to see the button.</p>
     {% endif %}
-  
   </nav>
 
 
