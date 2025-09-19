@@ -222,10 +222,11 @@
           <button type="submit">Click me</button>
         {% else %}
           <p>You already clicked the button ✅</p>
+          <p>{{ other_clicks }} other users clicked this button</p>
         {% endif %}
       </form>
 
-      <p>{{ other_clicks }} other users clicked this button</p>
+      <!-- <p>{{ other_clicks }} other users clicked this button</p> -->
     {% else %}
       <p></p>
     {% endif %}
