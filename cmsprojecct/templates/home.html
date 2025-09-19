@@ -10,8 +10,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      /* background-color: #f4f4f4; */
-      background-color: aquamarine;
+      background-color: #f4f4f4;
       margin: 0;
       padding: 0;
       color: #333;
@@ -215,7 +214,7 @@
 
 
     {% if user.is_authenticated %}
-      <h2>Welcome, {{ user.username }}!</h2>
+      <!-- <h2>Welcome, {{ user.username }}!</h2> -->
 
       <form method="post" action="{% url 'button_view' %}">
         {% csrf_token %}
@@ -228,7 +227,7 @@
 
       <p>{{ other_clicks }} other users clicked this button</p>
     {% else %}
-      <p>You must log in to see the button.</p>
+      <p></p>
     {% endif %}
   </nav>
 
