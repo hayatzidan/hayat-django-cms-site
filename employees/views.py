@@ -4,7 +4,7 @@ from django.contrib import messages
 from .forms import PhoneLoginForm
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Employee, LinkedAccount
+from .models import Employee, LinkedAccount, ButtonClick
 from django.contrib.auth.models import User
 # from reversion.models import Version
 from decouple import config
@@ -184,4 +184,24 @@ def accountsettings(request):
     return render(request, "employees/accountsettings.html", {
         "user": user,
         "social_accounts": social_accounts,
+    })
+
+
+@login_required
+def button_view(request):
+    user = request.user
+    click, created = ButtonClick.objects.get_or_create(user=user)
+
+    if request.method == "POST":
+        if not click.clicked:  
+            click.clicked = True
+            click.save()
+        return redirect("button_view")
+
+    total_clicks = ButtonClick.objects.filter(clicked=True).count()
+    other_clicks = total_clicks - 1 if click.clicked else total_clicks
+
+    return render(request, "home.html", {
+        "clicked": click.clicked,
+        "other_clicks": other_clicks
     })
