@@ -169,6 +169,19 @@
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
       z-index: 9999;
     }
+    .click-me button {
+      background-color: rgb(181, 57, 57);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+
+
+
   </style>
   {% render_block "css" %}
 </head>
@@ -211,7 +224,28 @@
         </div>
       </div>  
     {% endif %}
+
+
+    {% if user.is_authenticated %}
+      <div class="click-me">
+
+      <form method="post" action="{% url 'button_view' %}">
+        {% csrf_token %}
+        {% if not clicked %}
+          <button type="submit">Click me</button>
+        {% else %}
+          <p>You already clicked the button ✅</p>
+          <p>{{ other_clicks }} other users clicked this button</p>
+        {% endif %}
+      </form>
+
+      <!-- <p>{{ other_clicks }} other users clicked this button</p> -->
+    {% else %}
+      <p></p>
+      </div>
+    {% endif %}
   </nav>
+
 
 
 

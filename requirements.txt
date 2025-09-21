@@ -70,6 +70,7 @@ pycparser==2.22
 PyJWT==2.10.1
 pyparsing==3.2.3
 python-dateutil==2.9.0.post0
+python-decouple==3.8
 python3-openid==3.2.0
 reportlab==4.3.1
 requests==2.32.3
@@ -84,7 +85,7 @@ sqlparse==0.5.3
 svglib==1.5.1
 tinycss2==1.4.0
 twilio==9.6.2
-typing-extensions==4.14.1
+typing_extensions==4.14.1
 tzdata==2025.2
 uritemplate==4.2.0
 urllib3==2.4.0
