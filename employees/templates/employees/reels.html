@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="reels-container">
+  <!-- Instagram -->
+  <div class="reel">
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DOkY07djTX_/" data-instgrm-version="14"></blockquote>
+  </div>
+
+  <!-- TikTok -->
+  <div class="reel">
+    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@username/video/VIDEO_ID" data-video-id="VIDEO_ID"></blockquote>
+  </div>
+
+  <!-- Add 7 more -->
+  <div class="reel">...</div>
+  <div class="reel">...</div>
+  <div class="reel">...</div>
+  <div class="reel">...</div>
+  <div class="reel">...</div>
+  <div class="reel">...</div>
+  <div class="reel">...</div>
+</div>
+
+<!-- Instagram embed script -->
+<script async src="//www.instagram.com/embed.js"></script>
+<!-- TikTok embed script -->
+<script async src="https://www.tiktok.com/embed.js"></script>
+
+<style>
+.reels-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+.reel {
+  width: 100%;
+  overflow: hidden;
+}
+</style>
+{% endblock %}
