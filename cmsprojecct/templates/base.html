@@ -29,6 +29,54 @@ float: left;
 width: 20%;
 float: left;
 }
+
+/* grid layout */
+.reels-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  align-items: start;
+}
+
+/* each plugin cell */
+.reel {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 420px; /* optional: keep embeds reasonable width */
+  margin: 0 auto;
+}
+
+/* FORCE embedded elements to scale to the parent cell */
+/* Instagram / TikTok blockquotes, iframes, injected divs */
+.reel blockquote.instagram-media,
+.reel blockquote.instagram-media > div,
+.reel .tiktok-embed,
+.reel iframe,
+.reel > iframe,
+.reel .tiktok-embed > iframe,
+.reel .tiktok-embed * {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* make sure instagram placeholder internals don't keep a calc() width */
+.reel blockquote.instagram-media[style] {
+  /* remove restrictive inline width/padding from Instagram */
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* responsive breakpoints */
+@media (max-width: 900px) {
+  .reels-container { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .reels-container { grid-template-columns: 1fr; }
+}
 </style>
 {% render_block "css" %}
 </head>

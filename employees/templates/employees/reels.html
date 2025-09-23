@@ -1,20 +1,10 @@
 {% extends "base.html" %}
+{% load cms_tags %}
 
 {% block content %}
-<div class="reels-container">
+  <div class="reels-container">
     {% placeholder "reels_grid" %}
-</div>
-
-<style>
-.reels-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 20px;
-}
-.reels-container > div {
-  width: 100%;
-  overflow: hidden;
-}
-</style>
+  </div>
 {% endblock %}
+
+
