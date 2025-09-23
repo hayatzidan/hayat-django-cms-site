@@ -286,7 +286,7 @@ SITE_ID = 1
 
 CMS_TEMPLATES = (
     ('home.html', _('Home page template')),
-    ('reels.html', _('reels page template')),
+    ('employees/reels.html', _('reels page template')),
     
 )
 
