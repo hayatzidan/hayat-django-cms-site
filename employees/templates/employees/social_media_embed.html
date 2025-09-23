@@ -1,4 +1,4 @@
-{# templates/employees/social_media_embed.html #}
+<!-- {# templates/employees/social_media_embed.html #}
 
 <div class="social-embed-widget">
     {% if instance.title %}
@@ -7,4 +7,15 @@
     <div class="embed-code">
         {{ instance.embed_code|safe }}
     </div>
+</div> -->
+
+
+<!-- templates/employees/social_media_embed.html -->
+<div class="reel social-embed-widget">
+  {% if instance.title %}
+    <h3>{{ instance.title }}</h3>
+  {% endif %}
+  <div class="embed-code">
+    {{ instance.embed_code|safe }}
+  </div>
 </div>

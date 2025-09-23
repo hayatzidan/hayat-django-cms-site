@@ -30,44 +30,57 @@ width: 20%;
 float: left;
 }
 
-/* grid layout */
+/* --- Reels grid --- */
 .reels-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px;
   align-items: start;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* each plugin cell */
+/* ensure each plugin is full width inside its grid cell */
 .reel {
   width: 100%;
   box-sizing: border-box;
-  max-width: 420px; /* optional: keep embeds reasonable width */
-  margin: 0 auto;
+  margin: 0;
 }
 
-/* FORCE embedded elements to scale to the parent cell */
-/* Instagram / TikTok blockquotes, iframes, injected divs */
+/* the embed wrapper */
+.reel .embed-code {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Force many possible embed elements to be fluid */
 .reel blockquote.instagram-media,
-.reel blockquote.instagram-media > div,
+.reel blockquote.instagram-media *,
 .reel .tiktok-embed,
+.reel .tiktok-embed *,
 .reel iframe,
-.reel > iframe,
-.reel .tiktok-embed > iframe,
-.reel .tiktok-embed * {
+.reel iframe * {
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
   box-sizing: border-box !important;
 }
 
-/* make sure instagram placeholder internals don't keep a calc() width */
+/* override Instagram's inline calc() width/padding/margins */
 .reel blockquote.instagram-media[style] {
-  /* remove restrictive inline width/padding from Instagram */
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* make embed children centered and block-level */
+.reel .embed-code > * {
+  display: block;
+  margin: 0 auto;
 }
 
 /* responsive breakpoints */
@@ -101,5 +114,22 @@ float: left;
 
 {% render_block "js" %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<!-- Instagram & TikTok embed scripts (include once on the page) -->
+<script async src="//www.instagram.com/embed.js"></script>
+<script async src="https://www.tiktok.com/embed.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // re-run Instagram processing if available
+  try {
+    if (window.instgrm && instgrm.Embeds && typeof instgrm.Embeds.process === 'function') {
+      instgrm.Embeds.process();
+    }
+  } catch(e) { console.warn('Instagram embeds init error', e); }
+
+  // TikTok embed script usually auto-inits; if you need to re-trigger something,
+  // the script itself will handle it in most cases.
+});
+</script>
 </body>
 </html>
