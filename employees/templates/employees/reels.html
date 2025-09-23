@@ -2,35 +2,8 @@
 
 {% block content %}
 <div class="reels-container">
-  <!-- Instagram Reel -->
-  <div class="reel">
-    <blockquote class="instagram-media" 
-      data-instgrm-captioned 
-      data-instgrm-permalink="https://www.instagram.com/reel/DOkb23RjTRA/?utm_source=ig_embed&amp;utm_campaign=loading" 
-      data-instgrm-version="14" 
-      style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-    </blockquote>
-  </div>
-
-  <!-- Example TikTok -->
-  <div class="reel">
-    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@scout2015/video/6718335390845095173" data-video-id="6718335390845095173"></blockquote>
-  </div>
-
-  <!-- More reels -->
-  <div class="reel">Another Instagram or TikTok</div>
-  <div class="reel">...</div>
-  <div class="reel">...</div>
-  <div class="reel">...</div>
-  <div class="reel">...</div>
-  <div class="reel">...</div>
-  <div class="reel">...</div>
+    {% placeholder "reels_grid" %}
 </div>
-
-<!-- Instagram embed script -->
-<script async src="//www.instagram.com/embed.js"></script>
-<!-- TikTok embed script -->
-<script async src="https://www.tiktok.com/embed.js"></script>
 
 <style>
 .reels-container {
@@ -39,7 +12,7 @@
   gap: 20px;
   padding: 20px;
 }
-.reel {
+.reels-container > div {
   width: 100%;
   overflow: hidden;
 }
