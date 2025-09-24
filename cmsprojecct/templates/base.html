@@ -1,4 +1,4 @@
-{% extends "bootstrap5/base.html" %}
+<!-- {% extends "bootstrap5/base.html" %}
 {% load cms_tags menu_tags sekizai_tags %}
 
 <!DOCTYPE html>
@@ -101,8 +101,8 @@ float: left;
 
 {% render_block "js" %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-<!-- Instagram & TikTok embed scripts (include once on the page) -->
-<script async src="//www.instagram.com/embed.js"></script>
+Instagram & TikTok embed scripts (include once on the page) -->
+<!-- <script async src="//www.instagram.com/embed.js"></script>
 <script async src="https://www.tiktok.com/embed.js"></script>
 
 <script>
@@ -115,4 +115,53 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 </body>
-</html>
+</html> -->
+
+{% extends "bootstrap5/base.html" %}
+{% load cms_tags menu_tags sekizai_tags %}
+
+{% block title %}My Website{% endblock %}
+
+{% block extrahead %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+<style>
+/* your CSS styles here (nav, reels-container, etc.) */
+</style>
+{% render_block "css" %}
+{% endblock %}
+
+{% block body %}
+{% cms_toolbar %}
+<div class="container">
+  <ul class="nav">
+    <li><a href="/">Home Page</a></li>
+    <li><a href="/en/terms-of-service/">Terms of Service</a></li>
+    <li><a href="/en/privacy-policy/">Privacy Policy</a></li>
+
+    {% if request.user.is_authenticated %}
+      <li><a href="/en/employees/">Employees</a></li>
+      <li><a href="/en/currency-calculator/">Currency Calculator</a></li>
+    {% endif %}
+  </ul>
+
+  {% block content %}
+  {% placeholder "content" %}
+  {% endblock content %}
+</div>
+
+{% render_block "js" %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script async src="//www.instagram.com/embed.js"></script>
+<script async src="https://www.tiktok.com/embed.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    if (window.instgrm && instgrm.Embeds && typeof instgrm.Embeds.process === 'function') {
+      instgrm.Embeds.process();
+    }
+  } catch(e) { console.warn('Instagram embeds init error', e); }
+});
+</script>
+{% endblock %}
