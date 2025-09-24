@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+<!-- {% extends "base.html" %}
 {% load cms_tags sekizai_tags %}
 
 <!DOCTYPE html>
@@ -16,4 +16,17 @@
 
     {% render_block "js" %}
 </body>
-</html>
+</html> -->
+
+{% extends "base.html" %}
+{% load cms_tags sekizai_tags %}
+
+{% block title %}Reels{% endblock %}
+
+{% block content %}
+  <h1>Reels</h1>
+
+  <div class="reels-container">
+    {% placeholder "reels_grid" %}
+  </div>
+{% endblock %}

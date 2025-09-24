@@ -30,52 +30,81 @@ width: 20%;
 float: left;
 }
 
-/*grid*/
+/* ===== Reels grid - robust version ===== */
 .reels-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
+  /* minmax(0, 1fr) prevents children from forcing column min-widths */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
+  justify-items: center; /* center each grid item horizontally */
   align-items: start;
 }
 
+/* Force each grid child to be able to shrink */
 .reel {
   width: 100%;
+  max-width: 360px; /* control tile width so grid stays even */
+  min-width: 0;     /* VERY IMPORTANT to allow shrinking in CSS Grid */
+  box-sizing: border-box;
   margin: 0;
-  box-sizing: border-box;
 }
 
-.reel .embed-code {
+/* Ensure the raw embed wrapper is fluid */
+.reel .embed-code,
+.reel .embed-code * {
+  box-sizing: border-box !important;
   width: 100% !important;
   max-width: 100% !important;
-  margin: 0 auto;
-  box-sizing: border-box;
+  min-width: 0 !important;
 }
 
-/* fixed Instagram */
-.reel blockquote.instagram-media[style],
-.reel blockquote.instagram-media {
+/* Neutralize Instagram injected inline styles (calc/min-width/max-width) */
+.reel blockquote.instagram-media,
+.reel blockquote.instagram-media[style] {
+  display: block !important;
   width: 100% !important;
   max-width: 100% !important;
+  min-width: 0 !important;
   margin: 0 auto !important;
   padding: 0 !important;
 }
 
-/* fixed TikTok */
-.reel .tiktok-embed {
+/* Make any iframes inside the embeds fluid */
+.reel iframe,
+.reel iframe * {
   width: 100% !important;
   max-width: 100% !important;
-  margin: 0 auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Tiktok wrapper specifics (they sometimes wrap in div/iframe) */
+.reel .tiktok-embed,
+.reel .tiktok-embed > iframe,
+.reel .tiktok-embed > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Optional: keep vertical reels visually balanced */
+.reel iframe {
+  aspect-ratio: 9 / 16;
+  max-height: 80vh;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .reels-container { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1024px) {
+  .reels-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
   .reels-container { grid-template-columns: 1fr; }
+  .reel { max-width: 560px; } /* phone-friendly maximum */
 }
 </style>
 {% render_block "css" %}
@@ -106,12 +135,24 @@ float: left;
 <script async src="https://www.tiktok.com/embed.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+function reprocessEmbeds(){
   try {
     if (window.instgrm && instgrm.Embeds && typeof instgrm.Embeds.process === 'function') {
       instgrm.Embeds.process();
     }
-  } catch(e) { console.warn('Instagram embeds init error', e); }
+  } catch(e) {}
+  // TikTok script usually self-initializes; if you need more, we can add more handlers.
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  reprocessEmbeds();
+
+  // When CMS editing adds/removes plugins, DOM changes — reprocess embeds automatically:
+  var container = document.querySelector('.reels-container');
+  if (container && window.MutationObserver) {
+    var mo = new MutationObserver(function(){ reprocessEmbeds(); });
+    mo.observe(container, { childList: true, subtree: true });
+  }
 });
 </script>
 </body>
