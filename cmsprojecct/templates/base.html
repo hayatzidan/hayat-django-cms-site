@@ -120,11 +120,9 @@ document.addEventListener('DOMContentLoaded', function () {
 {% extends "bootstrap5/base.html" %}
 {% load cms_tags menu_tags sekizai_tags %}
 
-{% block title %}My Website{% endblock %}
+{% block title %}Reels Page{% endblock %}
 
 {% block extrahead %}
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
 <style>
 /* your CSS styles here (nav, reels-container, etc.) */
@@ -139,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
     <li><a href="/">Home Page</a></li>
     <li><a href="/en/terms-of-service/">Terms of Service</a></li>
     <li><a href="/en/privacy-policy/">Privacy Policy</a></li>
-
     {% if request.user.is_authenticated %}
       <li><a href="/en/employees/">Employees</a></li>
       <li><a href="/en/currency-calculator/">Currency Calculator</a></li>
@@ -147,12 +144,14 @@ document.addEventListener('DOMContentLoaded', function () {
   </ul>
 
   {% block content %}
-  {% placeholder "content" %}
+    <h1>Reels</h1>
+    <div class="reels-container">
+        {% placeholder "reels_grid" %}
+    </div>
   {% endblock content %}
 </div>
 
 {% render_block "js" %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script async src="//www.instagram.com/embed.js"></script>
 <script async src="https://www.tiktok.com/embed.js"></script>
 <script>
