@@ -3,7 +3,7 @@
 {% block content %}
 <h2 class="text-center">Reels & TikToks</h2>
 
-<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: auto;">
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: auto; background-color: brown;">
     {% for reel in reels %}
         <div>
             {% if reel.type == "tiktok" %}

@@ -218,7 +218,7 @@ def reels_view(request):
         # Instagram 1
         {
             "type": "instagram",
-            "url": "https://www.instagram.com/reel/C1iQp3eMxyz/",
+            "url": "https://www.instagram.com/p/DO6QdKDkTz_/",
         },
         # Instagram 2 (your new one)
         {
