@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from cms.models.pluginmodel import CMSPlugin
 from phonenumber_field.modelfields import PhoneNumberField
@@ -50,7 +51,17 @@ class GoogleLoginPluginModel(CMSPlugin):
 
 class SocialMediaEmbed(CMSPlugin):
     title = models.CharField(max_length=100, blank=True)
-    embed_code = models.TextField("Embed HTML Code")
+    embed_code = models.TextField(blank=True)
+
+    def clean_embed(self):
+        if not self.embed_code:
+            return ""
+        # naive but effective remove of inline style attributes
+        return re.sub(r'\sstyle=("|\').*?\1', '', self.embed_code, flags=re.S)
+
+    def save(self, *args, **kwargs):
+        self.embed_code = self.clean_embed()
+        super().save(*args, **kwargs)
 
 
 class TermsPluginModel(CMSPlugin):

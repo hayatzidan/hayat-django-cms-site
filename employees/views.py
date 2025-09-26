@@ -205,3 +205,59 @@ def button_view(request):
         "clicked": click.clicked,
         "other_clicks": other_clicks
     })
+
+
+def reels_view(request):
+    reels = [
+        # TikTok 1
+        {
+            "type": "tiktok",
+            "url": "https://www.tiktok.com/@english.with.me57/video/7514349911165472018",
+            "id": "7514349911165472018",
+        },
+        # Instagram 1
+        {
+            "type": "instagram",
+            "url": "https://www.instagram.com/p/DO6QdKDkTz_/",
+        },
+        # Instagram 2 (your new one)
+        {
+            "type": "instagram",
+            "url": "https://www.instagram.com/reel/DO-acfpje2i/",
+        },
+        # TikTok 2 (your new one)
+        {
+            "type": "tiktok",
+            "url": "https://www.tiktok.com/@english.with.me57/video/7522811276196597010",
+            "id": "7522811276196597010",
+        },
+        # Instagram 2 (your new one)
+        {
+            "type": "instagram",
+            "url": "https://www.instagram.com/p/DO9v3rEj7FY/",
+        },
+        # TikTok 2 (your new one)
+        {
+            "type": "tiktok",
+            "url": "https://www.tiktok.com/@english.with.me57/video/7477154169841782023",
+            "id": "7477154169841782023",
+        },
+        # TikTok 2 (your new one)
+        {
+            "type": "tiktok",
+            "url": "https://www.tiktok.com/@susupaints/video/7551475504742780174",
+            "id": "7551475504742780174",
+        },
+        # Instagram 2 (your new one)
+        {
+            "type": "instagram",
+            "url": "https://www.instagram.com/p/DOCtDr8DSVR/",
+        },
+        # TikTok 2 (your new one)
+        {
+            "type": "tiktok",
+            "url": "https://www.tiktok.com/@susupaints/video/7527772675389902093",
+            "id": "7527772675389902093",
+        },
+    ]
+    return render(request, "employees/reels.html", {"reels": reels})

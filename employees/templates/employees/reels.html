@@ -1,0 +1,32 @@
+{% extends "home.html" %}
+
+{% block content %}
+<h2 class="text-center">Reels & TikToks</h2>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: auto; background-color: brown;">
+    {% for reel in reels %}
+        <div>
+            {% if reel.type == "tiktok" %}
+                <blockquote class="tiktok-embed" cite="{{ reel.url }}" data-video-id="{{ reel.id }}" style="max-width: 305px; min-width: 225px;">
+                  <section>
+                    <a target="_blank" href="{{ reel.url }}">Watch on TikTok</a>
+                  </section>
+                </blockquote>
+            {% elif reel.type == "instagram" %}
+                <blockquote class="instagram-media"
+                            data-instgrm-permalink="{{ reel.url }}"
+                            data-instgrm-version="14"
+                            style="max-width: 305px; min-width: 225px;">
+                </blockquote>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+<!-- TikTok embed script -->
+<script async src="https://www.tiktok.com/embed.js"></script>
+
+<!-- Instagram embed script -->
+<script async src="//www.instagram.com/embed.js"></script>
+
+{% endblock %}
