@@ -4,9 +4,59 @@
 {% block title %}Reels{% endblock %}
 
 {% block content %}
-  <h1>Reels</h1>
+  <h1 style="text-align:center; margin-bottom:20px;">Reels</h1>
 
-  <div class="reels-container">
-    {% placeholder "reels_grid" %}
+  <div class="reels-grid">
+    <!-- Reel 1 -->
+    <div class="reel">
+      <blockquote class="instagram-media" 
+        data-instgrm-permalink="https://www.instagram.com/reel/DO1rMsykaf9/?utm_source=ig_embed&amp;utm_campaign=loading" 
+        data-instgrm-version="14" 
+        style="width:100%; max-width:300px; margin:auto;">
+      </blockquote>
+    </div>
+
+    <!-- Reel 2 -->
+    <div class="reel">
+      <iframe src="https://www.tiktok.com/embed/7321592602792674603" 
+        width="100%" height="500" 
+        frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- Reel 3 -->
+    <div class="reel">
+      <p style="text-align:center;">مكان Reel ثالث</p>
+    </div>
+
+    <!-- باقي الخانات -->
+    <div class="reel">Reel 4</div>
+    <div class="reel">Reel 5</div>
+    <div class="reel">Reel 6</div>
+    <div class="reel">Reel 7</div>
+    <div class="reel">Reel 8</div>
+    <div class="reel">Reel 9</div>
   </div>
+
+  <!-- سكربت انستجرام لازم يكون موجود -->
+  <script async src="//www.instagram.com/embed.js"></script>
 {% endblock %}
+<style>
+  .reels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: red; /* خلفية الشبكة */
+}
+
+  .reel {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
