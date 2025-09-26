@@ -231,5 +231,16 @@ def reels_view(request):
             "url": "https://www.tiktok.com/@english.with.me57/video/7522811276196597010",
             "id": "7522811276196597010",
         },
+        # Instagram 2 (your new one)
+        {
+            "type": "instagram",
+            "url": "https://www.instagram.com/p/DO9v3rEj7FY/",
+        },
+        # TikTok 2 (your new one)
+        {
+            "type": "tiktok",
+            "url": "https://www.tiktok.com/@english.with.me57/video/7477154169841782023",
+            "id": "7477154169841782023",
+        },
     ]
     return render(request, "employees/reels.html", {"reels": reels})
