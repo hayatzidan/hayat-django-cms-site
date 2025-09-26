@@ -7,11 +7,16 @@
     {% for reel in reels %}
         <div>
             {% if reel.type == "tiktok" %}
-                <blockquote class="tiktok-embed" cite="{{ reel.url }}" data-video-id="{{ reel.url|slice:'-19:' }}" style="max-width: 305px; min-width: 225px;">
-                  <section> <a target="_blank" href="{{ reel.url }}">Watch on TikTok</a> </section>
+                <blockquote class="tiktok-embed" cite="{{ reel.url }}" data-video-id="{{ reel.id }}" style="max-width: 305px; min-width: 225px;">
+                  <section>
+                    <a target="_blank" href="{{ reel.url }}">Watch on TikTok</a>
+                  </section>
                 </blockquote>
             {% elif reel.type == "instagram" %}
-                <blockquote class="instagram-media" data-instgrm-permalink="{{ reel.url }}" data-instgrm-version="14" style="max-width: 305px; min-width: 225px;">
+                <blockquote class="instagram-media"
+                            data-instgrm-permalink="{{ reel.url }}"
+                            data-instgrm-version="14"
+                            style="max-width: 305px; min-width: 225px;">
                 </blockquote>
             {% endif %}
         </div>
@@ -23,4 +28,5 @@
 
 <!-- Instagram embed script -->
 <script async src="//www.instagram.com/embed.js"></script>
+
 {% endblock %}
