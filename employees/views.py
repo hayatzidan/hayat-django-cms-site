@@ -223,4 +223,4 @@ def reels_view(request):
         # add more posts...
     ]
 
-    return render(request, "reels.html", {"reels": reels})
+    return render(request, "employees/reels.html", {"reels": reels})
