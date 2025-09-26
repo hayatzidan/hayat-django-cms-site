@@ -174,7 +174,7 @@ def account_settings(request):
         "facebook_account": facebook_account,
     })
 
-
+# kihiii
 @login_required
 def accountsettings(request):
     user = request.user  
