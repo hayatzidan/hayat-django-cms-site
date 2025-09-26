@@ -1,77 +1,26 @@
 {% extends "base.html" %}
-{% load cms_tags sekizai_tags %}
-
-{% block title %}Reels{% endblock %}
 
 {% block content %}
-  <h1 style="text-align:center; margin-bottom:20px;">Reels</h1>
+<h2 class="text-center">Reels & TikToks</h2>
 
-  <div class="reels-grid">
-    <!-- Instagram Reel -->
-    <div class="reel">
-      <blockquote class="instagram-media"
-        data-instgrm-permalink="https://www.instagram.com/reel/DO1rMsykaf9/?utm_source=ig_embed&amp;utm_campaign=loading"
-        data-instgrm-version="14"
-        style="width:100%; max-width:300px; margin:auto;">
-      </blockquote>
-    </div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: auto;">
+    {% for reel in reels %}
+        <div>
+            {% if reel.type == "tiktok" %}
+                <blockquote class="tiktok-embed" cite="{{ reel.url }}" data-video-id="{{ reel.url|slice:'-19:' }}" style="max-width: 305px; min-width: 225px;">
+                  <section> <a target="_blank" href="{{ reel.url }}">Watch on TikTok</a> </section>
+                </blockquote>
+            {% elif reel.type == "instagram" %}
+                <blockquote class="instagram-media" data-instgrm-permalink="{{ reel.url }}" data-instgrm-version="14" style="max-width: 305px; min-width: 225px;">
+                </blockquote>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
 
-    <!-- TikTok Reel -->
-    <div class="reel">
-      <blockquote class="tiktok-embed"
-        cite="https://www.tiktok.com/@english.with.me57/video/7514349911165472018"
-        data-video-id="7514349911165472018"
-        style="max-width: 100%; min-width: 250px;">
-        <section>
-          <a target="_blank" title="@english.with.me57"
-            href="https://www.tiktok.com/@english.with.me57?refer=embed">
-            @english.with.me57
-          </a>
-          <p></p>
-          <a target="_blank" title="♬ original sound - English with me"
-            href="https://www.tiktok.com/music/original-sound-7514349945266096912?refer=embed">
-            ♬ original sound - English with me
-          </a>
-        </section>
-      </blockquote>
-    </div>
+<!-- TikTok embed script -->
+<script async src="https://www.tiktok.com/embed.js"></script>
 
-    <!-- مكان Reel ثالث -->
-    <div class="reel">
-      <p style="text-align:center;">Reel 3</p>
-    </div>
-
-    <!-- باقي الخانات -->
-    <div class="reel">Reel 4</div>
-    <div class="reel">Reel 5</div>
-    <div class="reel">Reel 6</div>
-    <div class="reel">Reel 7</div>
-    <div class="reel">Reel 8</div>
-    <div class="reel">Reel 9</div>
-  </div>
-
-  <!-- سكربتات انستجرام وتيك توك -->
-  <script async src="//www.instagram.com/embed.js"></script>
-  <script async src="https://www.tiktok.com/embed.js"></script>
+<!-- Instagram embed script -->
+<script async src="//www.instagram.com/embed.js"></script>
 {% endblock %}
-
-<style>
-.reels-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: red; /* خلفية الشبكة */
-}
-
-.reel {
-  background-color: white;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>

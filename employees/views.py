@@ -205,3 +205,22 @@ def button_view(request):
         "clicked": click.clicked,
         "other_clicks": other_clicks
     })
+
+
+def reels_view(request):
+    # List of Instagram & TikTok embed codes (or just the URLs)
+    reels = [
+        # Example TikTok
+        {
+            "type": "tiktok",
+            "url": "https://www.tiktok.com/@english.with.me57/video/7514349911165472018"
+        },
+        # Example Instagram
+        {
+            "type": "instagram",
+            "url": "https://www.instagram.com/reel/C1iQp3eMxyz/"
+        },
+        # add more posts...
+    ]
+
+    return render(request, "reels.html", {"reels": reels})

@@ -13,4 +13,5 @@ urlpatterns = [
     path("settings/", views.accountt_settings, name="accountt_settings"),
     path("unlink/<int:account_id>/", views.unlink_account, name="unlink_account"),
     path("button/", views.button_view, name="button_view"),
+    path("reels/", views.reels_view, name="reels"),
 ]

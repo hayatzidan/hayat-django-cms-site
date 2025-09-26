@@ -29,93 +29,6 @@ float: left;
 width: 20%;
 float: left;
 }
-
-/* ================= GRID: reels ================= */
-.reels-container {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 equal columns, prevents forced min-width */
-  gap: 20px;
-  padding: 20px;
-  box-sizing: border-box;
-  justify-items: center; /* center content horizontally inside each cell */
-  align-items: start;
-  /* Optional visual background for debugging - remove in prod */
-  /* background: #e82727; */
-}
-
-/* grid cell */
-.reel {
-  width: 100%;
-  min-width: 0;          /* VERY IMPORTANT so grid children can shrink */
-  max-width: 420px;      /* controls how wide each tile becomes */
-  box-sizing: border-box;
-  background: #fff;      /* white tile background */
-  padding: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  overflow: hidden;
-}
-
-/* wrapper inside .reel that contains the raw embed HTML */
-.reel .embed-wrap {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  box-sizing: border-box !important;
-  display: block;
-}
-
-/* Force Instagram/TikTok & any iframe/div inside the embed to be fluid */
-.reel .embed-wrap,
-.reel .embed-wrap * {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  box-sizing: border-box !important;
-}
-
-/* Instagram neutralize inline calc/min-width */
-.reel blockquote.instagram-media,
-.reel blockquote.instagram-media[style] {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-}
-
-/* TikTok wrappers (they sometimes output iframe or div) */
-.reel .tiktok-embed,
-.reel .tiktok-embed > iframe,
-.reel .tiktok-embed > div {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  box-sizing: border-box !important;
-}
-
-/* make sure iframes fill the embed area */
-.reel iframe {
-  width: 100% !important;
-  height: auto !important;
-  display: block;
-}
-
-/* Optional: fixed height for a uniform grid look (uncomment if you want same-height tiles)
-.reel { height: 520px; } 
-.reel .embed-wrap iframe { height: 100% !important; object-fit: cover; } 
-*/
-
-/* Responsive columns */
-@media (max-width: 1024px) {
-  .reels-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 600px) {
-  .reels-container { grid-template-columns: 1fr; }
-  .reel { max-width: 560px; }
-}
 </style>
 {% render_block "css" %}
 </head>
@@ -140,30 +53,5 @@ float: left;
 
 {% render_block "js" %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-<!-- Instagram & TikTok embed scripts (include once on the page)  -->
-<script async src="//www.instagram.com/embed.js"></script>
-<script async src="https://www.tiktok.com/embed.js"></script>
-<script>
-function reprocessEmbeds(){
-  try {
-    if (window.instgrm && instgrm.Embeds && typeof instgrm.Embeds.process === 'function') {
-      instgrm.Embeds.process();
-    }
-  } catch(e) {}
-
-  // TikTok typically auto-inits; nothing required usually.
-}
-
-document.addEventListener('DOMContentLoaded', function(){
-  reprocessEmbeds();
-
-  // Watch for CMS insertion/removal of plugins while editing
-  var container = document.querySelector('.reels-container');
-  if (container && window.MutationObserver) {
-    var mo = new MutationObserver(function(){ reprocessEmbeds(); });
-    mo.observe(container, { childList: true, subtree: true });
-  }
-});
-</script>
 </body>
 </html>
